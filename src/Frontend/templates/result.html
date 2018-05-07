@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+   <body>
+        <body style="background-image:url('http://localhost:7000/SF_housing.jpg'); 
+        background-repeat: no-repeat; 
+        background-attachment: fixed; 
+        background-size: cover;">
+      <table border = 1 align="center">
+                {% for key, value in result.iteritems() %}
+                   <tr style="background-color:#F00">
+                      <th style="background-color:#FFF"> <h1>{{ key }} </th></h1>
+                      <td style="background-color:#FFF" > <h1>{{ value }} </td></h1>
+                   </tr>
+                {% endfor %}
+        </table>
+      
+   </body>
+</html>
