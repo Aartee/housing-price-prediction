@@ -14,3 +14,7 @@ The front-end has been developed using nodejs, expressjs and backend in python f
   `node server.js`
 * Enter the house address and then click on Get Estimate Price button to get the estmted housing price.
 * The prediction for the given address will be displayed based on GradientBoostRegressor technique in the data mining:
+
+## Estmating housing price using our regression model
+
+![Predicted Housing Price](https://github.com/Aartee/housing-price-prediction/blob/master/src/img/Predicted-Housing-Price.png)
