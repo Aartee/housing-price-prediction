@@ -14,8 +14,6 @@ def apply_model(model):
 	return mse, mae
 
 def train_model(X_train,y_train):
-		params = {'n_estimators': 300, 'max_depth': 4, 'min_samples_split': 2,
-          'learning_rate': 0.2, 'loss': 'ls'}
-        clf = ensemble.GradientBoostingRegressor(**params)
-
-        clf.fit(X_train, y_train)
+		params = {'n_estimators': 300, 'max_depth': 4, 'min_samples_split': 2,'learning_rate': 0.2, 'loss': 'ls'}
+		clf = ensemble.GradientBoostingRegressor(**params)
+		clf.fit(X_train, y_train)
