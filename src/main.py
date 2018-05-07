@@ -1,28 +1,14 @@
 from prepare_data import *
 from data_preprocess import preprocess
-
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import ShuffleSplit
-
-
 import sklearn.grid_search
 from sklearn import linear_model, decomposition
 from sklearn.model_selection import GridSearchCV
-
-from sklearn.decomposition import PCA
-from sklearn.pipeline import Pipeline
-from sklearn.model_selection import KFold
-
-
 import seaborn as sns
-
 from matplotlib import pyplot as plt
 from sklearn.model_selection import cross_val_score
-from sklearn.utils import shuffle
 from sklearn.metrics import mean_squared_error
 from sklearn import metrics
 import numpy as np
-
 from sklearn import ensemble
 from sklearn import linear_model
 from sklearn.grid_search import GridSearchCV
@@ -31,8 +17,17 @@ from sklearn.cross_validation import train_test_split
 import sklearn.metrics as metrics
 import matplotlib.pyplot as plt
 
+
+'''
+This class is used to build the predictive model
+'''
+
 class Model(object):
 	def __init__(self):
+		'''
+		Initializing the instance variables for training and testing
+
+		'''
 		self.train = None
 		self.target = None
 		self.clf = None
@@ -42,6 +37,10 @@ class Model(object):
 		self.y_train = None
 	
 	def start(self):
+		'''
+		The function reads and merges the datasets
+		populates the instance methods for training and testing data
+		'''
 		cdf = prepare_crime_data()
 		self.hdf = prepare_housing_data()
 		self.cdf = preprocess(cdf)
@@ -51,16 +50,28 @@ class Model(object):
 		return
 		
 	def split_train_test(self):
+		'''
+		split the training data into random training and testing subsamples
+
+		'''
 		self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.train, self.target, test_size=0.2, random_state=10)
 		return
 
 	def train_model(self):
+		'''
+		The final model is trained with Gradient Boost Regressor model
+		The parameters are set as below
+		
+		'''
 		params = {'n_estimators': 300, 'max_depth': 4, 'min_samples_split': 2, 'learning_rate': 0.2, 'loss': 'ls'}
 		self.clf = ensemble.GradientBoostingRegressor(**params)
 		self.clf.fit(self.X_train, self.y_train)
 		return
 	
 	def grid_Search(self):
+		'''
+		this function is used to evaluate various regression methods
+		'''
 		rs = 1
 		ests = [ linear_model.LinearRegression(), linear_model.Ridge(),
 		        linear_model.Lasso(), linear_model.ElasticNet(),
@@ -87,10 +98,16 @@ class Model(object):
 		return
 	
 	def get_rows(self, val):
+		'''
+		The associated column values are retrieved from the crime dataset
+		'''
 		row = self.cdf.loc[self.cdf['zipcode'] == val]
 		return row.drop(['zipcode'], axis=1)
 
 	def predict(self,val):
+		'''
+		This function predicts the price variable given a zipcode
+		'''
 		row = self.get_rows(val)
 		predicted_price = self.clf.predict(row)
 		return predicted_price 
