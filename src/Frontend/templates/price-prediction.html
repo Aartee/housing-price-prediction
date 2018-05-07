@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <title align="center">Predict Housing Price</title>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    </head>
+
+    <body style="background-image:url('http://localhost:7000/SF_housing.jpg'); 
+                background-repeat: no-repeat; 
+                background-attachment: fixed; 
+                background-size: cover;">
+        <form align="center" action="http://localhost:5000/getPredictedPrice" method = "POST">
+            <br><br>
+            <h1>Get Estimated Housing Price</h1><br><br><br><br><br>
+            <h1 style="color:#FFF"></span>Address:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="Address" id="dd"></input><br><br><br><br><br></h1>
+            <input type="submit" value="Get Estimate Housing Price">
+        </form>
+        <table border = 1 align="center">
+                {% for key, value in result.iteritems() %}
+                   <tr style="background-color:#F00">
+                      <th style="background-color:#FFF"> <h1>{{ key }} </th></h1>
+                      <td style="background-color:#FFF" > <h1>{{ value }} </td></h1>
+                   </tr>
+                {% endfor %}
+        </table>
+    </body>
+</html>
